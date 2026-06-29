@@ -3,6 +3,7 @@ import { createImport } from './import.js'
 import { createList } from './list.js'
 import { createRename } from './rename.js'
 import { createRm } from './rm.js'
+import { createSign } from './sign.js'
 import type { HTTPRPCOptions } from '../index.js'
 import type { HTTPRPCClient } from '../lib/core.js'
 
@@ -105,6 +106,18 @@ export interface KeyAPI {
    * ```
    */
   import(name: string, pem: string, password: string, options?: HTTPRPCOptions): Promise<Key>
+
+  /**
+   * Sign data with a key
+   *
+   * @example
+   * ```js
+   * const signature = await ipfs.key.sign('my-key', new TextEncoder().encode('hello'))
+   * console.log(signature)
+   * // 'UEhBT2Q3...'
+   * ```
+   */
+  sign(keyName: string, data: Uint8Array, options?: HTTPRPCOptions): Promise<string>
 }
 
 export function createKey (client: HTTPRPCClient): KeyAPI {
@@ -113,6 +126,7 @@ export function createKey (client: HTTPRPCClient): KeyAPI {
     import: createImport(client),
     list: createList(client),
     rename: createRename(client),
-    rm: createRm(client)
+    rm: createRm(client),
+    sign: createSign(client)
   }
 }

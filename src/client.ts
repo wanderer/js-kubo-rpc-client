@@ -30,6 +30,7 @@ import { createLs } from './ls.js'
 import { createMount } from './mount.js'
 import { createName } from './name/index.js'
 import { createObject } from './object/index.js'
+import { createP2P } from './p2p/index.js'
 import { createPin } from './pin/index.js'
 import { createPing } from './ping.js'
 import { createPubsub } from './pubsub/index.js'
@@ -63,6 +64,7 @@ class KuboRPCClient implements KuboRPCClientInterface {
   public log: KuboRPCClientInterface['log']
   public name: KuboRPCClientInterface['name']
   public object: KuboRPCClientInterface['object']
+  public p2p: KuboRPCClientInterface['p2p']
   public pin: KuboRPCClientInterface['pin']
   public pubsub: KuboRPCClientInterface['pubsub']
   public refs: KuboRPCClientInterface['refs']
@@ -134,6 +136,7 @@ class KuboRPCClient implements KuboRPCClientInterface {
     this.log = createLog(client)
     this.name = createName(client)
     this.object = createObject(client, this.codecs)
+    this.p2p = createP2P(client)
     this.pin = createPin(client)
     this.pubsub = createPubsub(client)
     this.refs = createRefs(client)

@@ -19,6 +19,7 @@ import type { LoadHasherFn } from './lib/multihashes.js'
 import type { LogAPI } from './log/index.js'
 import type { NameAPI } from './name/index.js'
 import type { ObjectAPI } from './object/index.js'
+import type { P2PAPI } from './p2p/index.js'
 import type { PinAPI } from './pin/index.js'
 import type { PubSubAPI } from './pubsub/index.js'
 import type { RefsAPI } from './refs/index.js'
@@ -330,6 +331,7 @@ export interface KuboRPCClient {
   log: LogAPI
   name: NameAPI
   object: ObjectAPI
+  p2p: P2PAPI
   pin: PinAPI
   pubsub: PubSubAPI
   refs: RefsAPI
@@ -530,6 +532,7 @@ export * from './key/index.js'
 export * from './log/index.js'
 export * from './name/index.js'
 export * from './object/index.js'
+export * from './p2p/index.js'
 export * from './pin/index.js'
 export * from './pubsub/index.js'
 export * from './refs/index.js'
