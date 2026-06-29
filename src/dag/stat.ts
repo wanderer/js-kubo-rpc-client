@@ -28,7 +28,11 @@ export function createStat (client: HTTPRPCClient) {
       headers: options.headers
     })
 
-    const data = await res.json()
+    // dag/stat may return NDJSON (progress updates + final result). Parse
+    // all lines and use the last (most complete) one.
+    const text = await res.text()
+    const lines = text.trim().split('\n').filter(l => l.length > 0)
+    const data = JSON.parse(lines[lines.length - 1])
 
     // dag/stat returns { TotalSize, DagStats: [{ Cid, Size, NumBlocks }], UniqueBlocks, Ratio }
     const dagStat = data.DagStats?.[0] ?? {}
