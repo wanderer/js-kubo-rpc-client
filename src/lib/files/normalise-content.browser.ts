@@ -12,7 +12,7 @@ import type { ToContent } from '../../index.js'
 export async function normaliseContent (input: ToContent): Promise<Blob> {
   // Bytes
   if (isBytes(input)) {
-    return new Blob([input])
+    return new Blob([input as unknown as BlobPart])
   }
 
   // String
@@ -60,7 +60,7 @@ export async function normaliseContent (input: ToContent): Promise<Blob> {
   throw new InvalidParametersError(`Unexpected input: ${input}`)
 }
 
-async function itToBlob (stream: AsyncIterable<BlobPart> | Iterable<BlobPart>): Promise<Blob> {
+async function itToBlob (stream: AsyncIterable<any> | Iterable<any>): Promise<Blob> {
   const parts = []
 
   for await (const chunk of stream) {

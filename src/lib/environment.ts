@@ -11,7 +11,7 @@
 // Detect Deno early — it has a global `Deno` object.
 const isDeno = typeof Deno !== 'undefined' && typeof Deno.version !== 'undefined'
 
-const isEnvWithDom = typeof window === 'object' && typeof document === 'object' && document.nodeType === 9
+const isEnvWithDom = typeof window === 'object' && typeof (globalThis as any).document === 'object' && (globalThis as any).document.nodeType === 9
 
 // Electron detection without env access — check process.versions.electron.
 const isElectron = typeof globalThis.process !== 'undefined' &&

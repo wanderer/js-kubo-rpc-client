@@ -84,7 +84,7 @@ export async function multipartRequest (source: ImportCandidateStream, abortCont
   // and to validate its contents.
   // We cannot do this in the `for await..of` in streamFiles due to
   // https://github.com/node-fetch/node-fetch/issues/753
-  const peekable = itPeekable(normaliseInput(source))
+  const peekable = itPeekable(normaliseInput(source) as any)
   const { value, done } = await peekable.peek()
 
   if (done !== true) {
@@ -98,6 +98,6 @@ export async function multipartRequest (source: ImportCandidateStream, abortCont
     headers: merge(headers, {
       'Content-Type': `multipart/form-data; boundary=${boundary}`
     }),
-    body: toStream(streamFiles(peekable))
+    body: toStream(streamFiles(peekable as any))
   }
 }

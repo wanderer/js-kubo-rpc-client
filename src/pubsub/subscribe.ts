@@ -60,12 +60,12 @@ export function createSubscribe (client: HTTPRPCClient, subsTracker: Subscriptio
             }
 
             if (typeof handler === 'function') {
-              handler(message)
+              (handler as any)(message)
               return
             }
 
-            if (typeof handler.handleEvent === 'function') {
-              handler.handleEvent(message)
+            if (typeof (handler as any).handleEvent === 'function') {
+              (handler as any).handleEvent(message)
             }
           },
           onEnd: () => {
