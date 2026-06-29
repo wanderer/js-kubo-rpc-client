@@ -3,9 +3,13 @@ import { createGet } from './get.js'
 import { createImport } from './import.js'
 import { createPut } from './put.js'
 import { createResolve } from './resolve.js'
+import { createStat } from './stat.js'
 import type { Codecs, HTTPRPCOptions, IPFSPath } from '../index.js'
 import type { HTTPRPCClient } from '../lib/core.js'
 import type { CID, Version } from 'multiformats/cid'
+import type { DagStatResult, DagStatOptions } from './stat.js'
+
+export type { DagStatResult, DagStatOptions } from './stat.js'
 
 export interface DAGGetOptions extends HTTPRPCOptions {
   /**
@@ -223,6 +227,11 @@ export interface DAGAPI {
    * within the CARs.
    */
   import(sources: Iterable<Uint8Array> | AsyncIterable<Uint8Array> | AsyncIterable<AsyncIterable<Uint8Array>> | Iterable<AsyncIterable<Uint8Array>>, options?: DAGImportOptions): AsyncIterable<DAGImportResult>
+
+  /**
+   * Get statistics about a DAG node
+   */
+  stat(cid: CID, options?: DagStatOptions): Promise<DagStatResult>
 }
 
 export function createDAG (client: HTTPRPCClient, codecs: Codecs): DAGAPI {
@@ -231,6 +240,7 @@ export function createDAG (client: HTTPRPCClient, codecs: Codecs): DAGAPI {
     get: createGet(client, codecs),
     import: createImport(client),
     put: createPut(client, codecs),
-    resolve: createResolve(client)
+    resolve: createResolve(client),
+    stat: createStat(client)
   }
 }
