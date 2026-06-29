@@ -137,7 +137,7 @@ export class HTTP {
     try {
       if (globalThis.ReadableStream != null && opts.body instanceof globalThis.ReadableStream && (isBrowser || isWebWorker)) {
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1387483
-        opts.body = new Blob(await all(browserReableStreamToIt<Uint8Array>(opts.body)))
+        opts.body = new Blob(await all(browserReableStreamToIt<Uint8Array>(opts.body)) as unknown as BlobPart[])
       }
 
       log.trace('outgoing headers', opts.headers)
