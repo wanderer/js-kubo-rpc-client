@@ -1,4 +1,4 @@
-import type { EventHandler, Message } from '@libp2p/interface'
+import type { EventHandler, Message } from './types.js'
 
 export interface PubsubSubscription {
   handler: EventHandler<Message>

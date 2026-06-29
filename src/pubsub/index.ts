@@ -6,7 +6,8 @@ import { SubscriptionTracker } from './subscription-tracker.js'
 import { createUnsubscribe } from './unsubscribe.js'
 import type { HTTPRPCOptions } from '../index.js'
 import type { HTTPRPCClient } from '../lib/core.js'
-import type { EventHandler, PeerId, Message } from '@libp2p/interface'
+import type { EventHandler, Message } from './types.js'
+import type { PeerId } from '@libp2p/interface'
 
 export interface PubSubAPI {
   /**

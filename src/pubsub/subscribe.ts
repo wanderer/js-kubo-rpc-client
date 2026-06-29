@@ -8,7 +8,7 @@ import type { SubscriptionTracker } from './subscription-tracker.js'
 import type { HTTPRPCClient } from '../lib/core.js'
 import type { AbortError } from '../lib/errors.js'
 import type { ExtendedResponse } from '../lib/http.js'
-import type { Message } from '@libp2p/interface'
+import type { Message } from './types.js'
 
 const log = logger('js-kubo-rpc-client:pubsub:subscribe')
 
