@@ -1,5 +1,5 @@
 /*
-import { isElectronMain } from 'wherearewe'
+import { isElectronMain } from './environment.js'
 
 // use window.fetch if it is available, fall back to node-fetch if not
 let impl = 'native-fetch'

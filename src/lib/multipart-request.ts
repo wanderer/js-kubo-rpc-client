@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { isElectronRenderer } from 'wherearewe'
+import { isElectronRenderer } from './environment.js'
 import { multipartRequest as multipartRequestBrowser } from './multipart-request.browser.js'
 import { multipartRequest as multipartRequestNode } from './multipart-request.node.js'
 import type { ImportCandidateStream } from '../index.js'

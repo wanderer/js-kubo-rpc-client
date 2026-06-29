@@ -1,4 +1,4 @@
-import { logger } from '@libp2p/logger'
+import { logger } from './logger.js'
 import itPeekable from 'it-peekable'
 // @ts-expect-error no types
 import toStream from 'it-to-stream'

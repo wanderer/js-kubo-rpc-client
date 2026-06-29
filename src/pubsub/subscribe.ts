@@ -1,5 +1,5 @@
 import { publicKeyFromProtobuf } from '@libp2p/crypto/keys'
-import { logger } from '@libp2p/logger'
+import { logger } from '../lib/logger.js'
 import { peerIdFromString } from '@libp2p/peer-id'
 import { textToUrlSafeRpc, rpcToText, rpcToBytes, rpcToBigInt } from '../lib/http-rpc-wire-format.js'
 import { toUrlSearchParams } from '../lib/to-url-search-params.js'

@@ -1,9 +1,4 @@
-import fs from 'node:fs'
-import fsp from 'node:fs/promises'
-import os from 'node:os'
-import Path from 'node:path'
-import { InvalidParametersError } from '@libp2p/interface'
-import glob from 'it-glob'
+import type { InvalidParametersError } from '@libp2p/interface'
 import type { MtimeLike } from 'ipfs-unixfs'
 import type { Options as GlobOptions } from 'it-glob'
 
@@ -22,11 +17,6 @@ export interface GlobSourceOptions {
    * Preserve mode
    */
   preserveMode?: boolean
-
-  /**
-   * Preserve mtime
-   */
-  preserveMtime?: boolean
 
   /**
    * mode to use - if preserveMode is true this will be ignored
@@ -48,13 +38,34 @@ export interface GlobSourceResult {
 
 /**
  * Create an async iterator that yields paths that match requested glob pattern
+ *
+ * Note: the heavy node-only dependencies (`it-glob`, `node:fs`, `node:os`,
+ * `node:path`) are loaded lazily via dynamic `import()` so that merely
+ * importing this module does not trigger `os.cpus()` (which requires
+ * `--allow-sys` in Deno) or load `fast-glob`.
  */
 export async function * globSource (cwd: string, pattern: string, options?: GlobSourceOptions): AsyncGenerator<GlobSourceResult> {
   options = options ?? {}
 
   if (typeof pattern !== 'string') {
+    const { InvalidParametersError } = await import('@libp2p/interface')
     throw new InvalidParametersError('Pattern must be a string')
   }
+
+  // Lazily load node-only deps
+  const [
+    { default: fs },
+    { default: fsp },
+    { default: os },
+    { default: Path },
+    { default: glob }
+  ] = await Promise.all([
+    import('node:fs'),
+    import('node:fs/promises'),
+    import('node:os'),
+    import('node:path'),
+    import('it-glob')
+  ])
 
   if (!Path.isAbsolute(cwd)) {
     cwd = Path.resolve(process.cwd(), cwd)

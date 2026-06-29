@@ -1,11 +1,11 @@
 /* eslint-env browser */
 
-import { logger } from '@libp2p/logger'
+import { logger } from './logger.js'
 import { isMultiaddr } from '@multiformats/multiaddr'
 // @ts-expect-error needs https://github.com/schnittstabil/merge-options/pull/28
 import mergeOpts from 'merge-options'
 import parseDuration from 'parse-duration'
-import { isBrowser, isWebWorker, isNode } from 'wherearewe'
+import { isBrowser, isWebWorker, isNode } from './environment.js'
 import getAgent from './agent.js'
 import { HTTP } from './http.js'
 import { toUrlString } from './to-url-string.js'
