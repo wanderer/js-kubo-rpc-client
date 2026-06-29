@@ -6,6 +6,8 @@
  * `--allow-env` permission check. This module avoids all `process.env` access.
  */
 
+/* eslint-env browser */
+
 // Detect Deno early — it has a global `Deno` object.
 const isDeno = typeof Deno !== 'undefined' && typeof Deno.version !== 'undefined'
 
@@ -28,12 +30,12 @@ export const isNode = !isDeno &&
   globalThis.process.release.name === 'node' &&
   !isElectron
 
-export const isWebWorker = typeof importScripts === 'function' &&
+export const isWebWorker = typeof (globalThis as any).importScripts === 'function' &&
   typeof self !== 'undefined' &&
-  typeof WorkerGlobalScope !== 'undefined' &&
-  self instanceof WorkerGlobalScope
+  typeof (globalThis as any).WorkerGlobalScope !== 'undefined' &&
+  self instanceof (globalThis as any).WorkerGlobalScope
 
 // Do not read process.env.NODE_ENV — it triggers Deno env permission checks.
 export const isTest = false
 
-export const isReactNative = typeof navigator !== 'undefined' && navigator.product === 'ReactNative'
+export const isReactNative = typeof navigator !== 'undefined' && (navigator as any).product === 'ReactNative'

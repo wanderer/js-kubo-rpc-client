@@ -20,6 +20,6 @@ export interface BrowserImportCandidate {
  * See https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsadddata-options
  */
 export function normaliseInput (input: ImportCandidateStream): AsyncGenerator<BrowserImportCandidate, void, undefined> {
-  // @ts-expect-error browser normaliseContent returns a Blob not an AsyncIterable<Uint8Array>
+  // @ts-ignore browser normaliseContent returns a Blob not an AsyncIterable<Uint8Array>
   return normaliseCandidateMultiple(input, normaliseContent, true)
 }

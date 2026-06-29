@@ -36,7 +36,7 @@ export async function * normaliseCandidateSingle (input: ImportCandidate, normal
 
   // Iterable<?>
   if (Symbol.iterator in input || Symbol.asyncIterator in input) {
-    // @ts-expect-error cannot detect iterability
+    // @ts-ignore cannot detect iterability
     const peekable = itPeekable(input)
     // eslint-disable-next-line @typescript-eslint/await-thenable
     const { value, done } = await peekable.peek()
@@ -52,7 +52,7 @@ export async function * normaliseCandidateSingle (input: ImportCandidate, normal
     // (Async)Iterable<Number>
     // (Async)Iterable<Bytes>
     // (Async)Iterable<String>
-    // @ts-expect-error value is never when instanceof String tested
+    // @ts-ignore value is never when instanceof String tested
     if (Number.isInteger(value) || isBytes(value) || typeof value === 'string' || value instanceof String) {
       yield toFileObject(peekable, normaliseContent)
       return
@@ -73,7 +73,7 @@ export async function * normaliseCandidateSingle (input: ImportCandidate, normal
 }
 
 async function toFileObject (input: ImportCandidate, normaliseContent: (content: ToContent) => Promise<AsyncIterable<Uint8Array>>): Promise<ImportCandidate> {
-  // @ts-expect-error - Those properties don't exist on most input types
+  // @ts-ignore - Those properties don't exist on most input types
   const { path, mode, mtime, content } = input
 
   const file: ImportCandidate = {
@@ -83,10 +83,10 @@ async function toFileObject (input: ImportCandidate, normaliseContent: (content:
   }
 
   if (content != null) {
-    // @ts-expect-error - input still can be different ToContent
+    // @ts-ignore - input still can be different ToContent
     file.content = await normaliseContent(content)
   } else if (path == null) { // Not already a file object with path or content prop
-    // @ts-expect-error - input still can be different ToContent
+    // @ts-ignore - input still can be different ToContent
     file.content = await normaliseContent(input)
   }
 

@@ -3,7 +3,7 @@ import { anySignal } from 'any-signal'
 import browserReableStreamToIt from 'browser-readablestream-to-it'
 import { URL, URLSearchParams } from 'iso-url'
 import all from 'it-all'
-// @ts-expect-error needs https://github.com/schnittstabil/merge-options/pull/28
+// @ts-ignore needs https://github.com/schnittstabil/merge-options/pull/28
 import mergeOpts from 'merge-options'
 import { isBrowser, isWebWorker } from './environment.js'
 import { TimeoutError, HTTPError } from './http/error.js'

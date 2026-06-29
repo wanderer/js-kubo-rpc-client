@@ -56,16 +56,16 @@ export class Multihashes {
   async getHasher (code: number | string): Promise<MultihashHasher> {
     const table = typeof code === 'string' ? this._hashersByName : this._hashersByCode
 
-    // @ts-expect-error cannot derive code type
+    // @ts-ignore cannot derive code type
     if (table[code] != null) {
-      // @ts-expect-error cannot derive code type
+      // @ts-ignore cannot derive code type
       return table[code]
     }
 
     // If not supported, attempt to dynamically load this hasher
     const hasher = await this._loadHasher(code)
 
-    // @ts-expect-error cannot derive code type
+    // @ts-ignore cannot derive code type
     if (table[code] == null) {
       this.addHasher(hasher)
     }

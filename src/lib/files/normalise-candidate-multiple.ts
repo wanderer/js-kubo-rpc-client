@@ -29,7 +29,7 @@ export async function * normaliseCandidateMultiple (input: ImportCandidateStream
   // Uint8Array|ArrayBuffer|TypedArray
   // Blob|File
   // fs.ReadStream
-  // @ts-expect-error _readableState is a property of a node fs.ReadStream
+  // @ts-ignore _readableState is a property of a node fs.ReadStream
   if (typeof input === 'string' || input instanceof String || isBytes(input) || isBlob(input) || input._readableState != null) {
     throw errCode(new Error('Unexpected input: single item passed - if you are using ipfs.addAll, please use ipfs.add instead'), 'ERR_UNEXPECTED_INPUT')
   }
@@ -41,7 +41,7 @@ export async function * normaliseCandidateMultiple (input: ImportCandidateStream
 
   // Iterable<?>
   if (Symbol.iterator in input || Symbol.asyncIterator in input) {
-    // @ts-expect-error cannot detect iterability
+    // @ts-ignore cannot detect iterability
     const peekable = itPeekable(input)
     // eslint-disable-next-line @typescript-eslint/await-thenable
     const { value, done } = await peekable.peek()
@@ -61,15 +61,15 @@ export async function * normaliseCandidateMultiple (input: ImportCandidateStream
     }
 
     // (Async)Iterable<fs.ReadStream>
-    // @ts-expect-error private field
+    // @ts-ignore private field
     if (value._readableState != null) {
-      // @ts-expect-error Node fs.ReadStreams have a `.path` property so we need to pass it as the content
+      // @ts-ignore Node fs.ReadStreams have a `.path` property so we need to pass it as the content
       yield * map(peekable, async value => toFileObject({ content: value }, normaliseContent))
       return
     }
 
     if (isBytes(value)) {
-      // @ts-expect-error peekable is still an iterable of ImportCandidates
+      // @ts-ignore peekable is still an iterable of ImportCandidates
       yield toFileObject({ content: peekable }, normaliseContent)
       return
     }
@@ -95,7 +95,7 @@ export async function * normaliseCandidateMultiple (input: ImportCandidateStream
 }
 
 async function toFileObject (input: ImportCandidate, normaliseContent: (content: ToContent) => Promise<AsyncIterable<Uint8Array>>): Promise<ImportCandidate> {
-  // @ts-expect-error - Those properties don't exist on most input types
+  // @ts-ignore - Those properties don't exist on most input types
   const { path, mode, mtime, content } = input
 
   const file: ImportCandidate = {
@@ -105,10 +105,10 @@ async function toFileObject (input: ImportCandidate, normaliseContent: (content:
   }
 
   if (content != null) {
-    // @ts-expect-error - input still can be different ToContent
+    // @ts-ignore - input still can be different ToContent
     file.content = await normaliseContent(content)
   } else if (path == null) { // Not already a file object with path or content prop
-    // @ts-expect-error - input still can be different ToContent
+    // @ts-ignore - input still can be different ToContent
     file.content = await normaliseContent(input)
   }
 

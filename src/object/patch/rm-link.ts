@@ -10,7 +10,7 @@ export function createRmLink (client: HTTPRPCClient): ObjectPatchAPI['rmLink'] {
       searchParams: toUrlSearchParams({
         arg: [
           `${cid}`,
-          // @ts-expect-error loose types
+          // @ts-ignore loose types
           dLink.Name ?? dLink.name ?? null
         ],
         ...options

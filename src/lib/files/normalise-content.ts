@@ -38,7 +38,7 @@ export async function normaliseContent (input: ToContent): Promise<AsyncIterable
 
   // (Async)Iterator<?>
   if (Symbol.iterator in input || Symbol.asyncIterator in input) {
-    // @ts-expect-error cannot detect iterability
+    // @ts-ignore cannot detect iterability
     const peekable = itPeekable(input)
     // eslint-disable-next-line @typescript-eslint/await-thenable
     const { value, done } = await peekable.peek()
@@ -57,9 +57,9 @@ export async function normaliseContent (input: ToContent): Promise<AsyncIterable
     }
 
     // (Async)Iterable<Bytes|String>
-    // @ts-expect-error value is never when instanceof String tested
+    // @ts-ignore value is never when instanceof String tested
     if (isBytes(value) || typeof value === 'string' || value instanceof String) {
-      // @ts-expect-error cannot derive type
+      // @ts-ignore cannot derive type
       return map(peekable, toBytes)
     }
   }

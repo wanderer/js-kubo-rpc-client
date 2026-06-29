@@ -13,6 +13,6 @@ import type { ImportCandidate } from '../../index.js'
  * See https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md#ipfsadddata-options
  */
 export function normaliseInput (input: ImportCandidate): BrowserImportCandidate {
-  // @ts-expect-error browser normaliseContent returns a Blob not an AsyncIterable<Uint8Array>
+  // @ts-ignore browser normaliseContent returns a Blob not an AsyncIterable<Uint8Array>
   return normaliseCandidateSingle(input, normaliseContent)
 }

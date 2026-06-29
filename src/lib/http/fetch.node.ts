@@ -1,13 +1,13 @@
 import { Buffer } from 'node:buffer'
-// @ts-expect-error no types
+// @ts-ignore no types
 import toStream from 'it-to-stream'
-// @ts-expect-error types are broken
+// @ts-ignore types are broken
 import { fetch, Request, Response, Headers } from '../fetch.js'
 import type { UploadProgressFn } from '../../index.js'
 import type { FetchOptions } from '../http.js'
 import type { Readable } from 'node:stream'
 
-const fetchWithProgress = async (url: string | Request, options: FetchOptions = {}): Promise<Response> =>
+const fetchWithProgress = async (url: string | Request, options: FetchOptions = {}): Promise<any> =>
   fetch(url, withUploadProgress(options))
 
 /**
@@ -35,7 +35,7 @@ const withUploadProgress = (options: FetchOptions): FetchOptions => {
   }
 }
 
-const normalizeBody = (input: BodyInit | Readable): BodyInit => {
+const normalizeBody = (input: BodyInit | Readable): any => {
   if (input instanceof ArrayBuffer) {
     return Buffer.from(input)
   } else if (ArrayBuffer.isView(input)) {
@@ -43,7 +43,7 @@ const normalizeBody = (input: BodyInit | Readable): BodyInit => {
   } else if (typeof input === 'string') {
     return Buffer.from(input)
   }
-  // @ts-expect-error could be stream
+  // @ts-ignore could be stream
   return input
 }
 

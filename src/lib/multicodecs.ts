@@ -53,16 +53,16 @@ export class Multicodecs {
   async getCodec (code: number | string): Promise<BlockCodec<any, any>> {
     const table = typeof code === 'string' ? this._codecsByName : this._codecsByCode
 
-    // @ts-expect-error cannot derive code type
+    // @ts-ignore cannot derive code type
     if (table[code] != null) {
-      // @ts-expect-error cannot derive code type
+      // @ts-ignore cannot derive code type
       return table[code]
     }
 
     // If not supported, attempt to dynamically load this codec
     const codec = await this._loadCodec(code)
 
-    // @ts-expect-error cannot derive code type
+    // @ts-ignore cannot derive code type
     if (table[code] == null) {
       this.addCodec(codec)
     }

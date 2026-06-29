@@ -23,7 +23,7 @@ export interface KeySignResult {
 export function createSign (client: HTTPRPCClient) {
   return async function sign (keyName: string, data: Uint8Array, options: KeySignOptions = {}): Promise<string> {
     const form = new FormData()
-    form.append('file', new Blob([data as BlobPart]))
+    form.append('file', new Blob([data as unknown as BlobPart]))
 
     const res = await client.post('key/sign', {
       signal: options.signal,

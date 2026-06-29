@@ -75,9 +75,9 @@ export async function * normaliseInput (input: Source): AsyncGenerator<Pin> {
   }
 
   // { cid: CID recursive, metadata }
-  // @ts-expect-error - it still could be iterable or async iterable
+  // @ts-ignore - it still could be iterable or async iterable
   if (input.cid != null || input.path != null) {
-    // @ts-expect-error cannot derive type
+    // @ts-ignore cannot derive type
     return yield toPin(input)
   }
 

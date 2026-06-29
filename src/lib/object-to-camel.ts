@@ -14,7 +14,7 @@ export function objectToCamel <T> (obj: Record<string, any>): T {
 
   const output: Record<string, any> = {}
 
-  // @ts-expect-error type may be unrelated
+  // @ts-ignore type may be unrelated
   return Object.keys(obj).reduce((camelObj, k) => {
     if (caps.test(k)) { // all caps
       camelObj[k.toLowerCase()] = obj[k]

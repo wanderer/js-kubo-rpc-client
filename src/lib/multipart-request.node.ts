@@ -1,8 +1,8 @@
 import { logger } from './logger.js'
 import itPeekable from 'it-peekable'
-// @ts-expect-error no types
+// @ts-ignore no types
 import toStream from 'it-to-stream'
-// @ts-expect-error needs https://github.com/schnittstabil/merge-options/pull/28
+// @ts-ignore needs https://github.com/schnittstabil/merge-options/pull/28
 import mergeOpts from 'merge-options'
 import { nanoid } from 'nanoid'
 import { normaliseInput } from './files/normalise-input-multiple.js'
@@ -28,7 +28,7 @@ export async function multipartRequest (source: ImportCandidateStream, abortCont
     try {
       let index = 0
 
-      // @ts-expect-error source may not be async iterable
+      // @ts-ignore source may not be async iterable
       for await (const { content, path, mode, mtime } of source) {
         let fileSuffix = ''
         const type = content != null ? 'file' : 'dir'
@@ -92,7 +92,7 @@ export async function multipartRequest (source: ImportCandidateStream, abortCont
   }
 
   return {
-    // @ts-expect-error streaming upload so parts are unknown
+    // @ts-ignore streaming upload so parts are unknown
     parts: null,
     total: -1,
     headers: merge(headers, {

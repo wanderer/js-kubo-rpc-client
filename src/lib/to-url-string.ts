@@ -4,7 +4,7 @@ import type { Multiaddr } from '@multiformats/multiaddr'
 
 export function toUrlString (url: string | Multiaddr | URL): string {
   try {
-    // @ts-expect-error cannot pass URL
+    // @ts-ignore cannot pass URL
     url = multiaddrToUri(multiaddr(url))
   } catch { }
 

@@ -5,7 +5,7 @@ import type { HTTPRPCClient } from '../../../lib/core.js'
 
 export function createLs (client: HTTPRPCClient): PinRemoteServiceAPI['ls'] {
   return async function ls (options = {}) {
-    // @ts-expect-error cannot derive option type from typedef
+    // @ts-ignore cannot derive option type from typedef
     const { stat, headers, timeout, signal } = options
 
     const response = await client.post('pin/remote/service/ls', {

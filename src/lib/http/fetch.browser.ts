@@ -1,4 +1,4 @@
-// @ts-expect-error types are broken
+// @ts-ignore types are broken
 import { fetch, Response, Request, Headers } from '../fetch.js'
 import { TimeoutError, AbortError } from './error.js'
 import type { FetchOptions } from '../http.js'
@@ -84,7 +84,7 @@ const fetchWithProgress = async (url: string | Request, options: FetchOptions = 
     request.ontimeout = handleEvent
     request.onabort = handleEvent
 
-    // @ts-expect-error options.body can be a node readable stream, which isn't compatible with XHR, but this
+    // @ts-ignore options.body can be a node readable stream, which isn't compatible with XHR, but this
     // file is a browser override so you won't get a node readable stream so ignore the error
     request.send(options.body)
   })

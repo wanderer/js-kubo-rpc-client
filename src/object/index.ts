@@ -6,14 +6,7 @@ import type { StatResult, StatOptions } from './stat.js'
 import type { HTTPRPCClient } from '../lib/core.js'
 import type { CID } from 'multiformats/cid'
 
-export interface StatResult {
-  Hash: CID
-  NumLinks: number
-  BlockSize: number
-  LinksSize: number
-  DataSize: number
-  CumulativeSize: number
-}
+export type { StatResult, StatOptions } from './stat.js'
 
 export interface ObjectAPI {
   patch: ObjectPatchAPI

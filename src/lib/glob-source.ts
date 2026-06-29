@@ -24,6 +24,11 @@ export interface GlobSourceOptions {
   mode?: number
 
   /**
+   * Preserve mtime
+   */
+  preserveMtime?: boolean
+
+  /**
    * mtime to use - if preserveMtime is true this will be ignored
    */
   mtime?: MtimeLike

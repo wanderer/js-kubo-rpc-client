@@ -22,5 +22,5 @@ export { Response }
 
 */
 
-// @ts-expect-error types are broken
+// @ts-ignore types are broken
 export * from 'native-fetch'

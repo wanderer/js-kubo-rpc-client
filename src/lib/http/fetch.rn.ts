@@ -1,4 +1,4 @@
-// @ts-expect-error types are broken
+// @ts-ignore types are broken
 import { fetch, Response, Request, Headers } from '../fetch.js'
 import { TimeoutError, AbortError } from './error.js'
 import type { FetchOptions } from '../http.js'

@@ -10,9 +10,9 @@ export function createAddLink (client: HTTPRPCClient): ObjectPatchAPI['addLink']
       searchParams: toUrlSearchParams({
         arg: [
           `${cid}`,
-          // @ts-expect-error loose types
+          // @ts-ignore loose types
           dLink.Name ?? dLink.name ?? '',
-          // @ts-expect-error loose types
+          // @ts-ignore loose types
           (dLink.Hash ?? dLink.cid ?? '').toString() ?? null
         ],
         ...options

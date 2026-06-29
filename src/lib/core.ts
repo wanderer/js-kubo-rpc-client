@@ -2,7 +2,7 @@
 
 import { logger } from './logger.js'
 import { isMultiaddr } from '@multiformats/multiaddr'
-// @ts-expect-error needs https://github.com/schnittstabil/merge-options/pull/28
+// @ts-ignore needs https://github.com/schnittstabil/merge-options/pull/28
 import mergeOpts from 'merge-options'
 import parseDuration from 'parse-duration'
 import { isBrowser, isWebWorker, isNode } from './environment.js'
@@ -162,13 +162,13 @@ export class Client extends HTTP implements HTTPRPCClient {
       agent: opts.agent
     })
 
-    // @ts-expect-error - cannot delete non-optional fields
+    // @ts-ignore - cannot delete non-optional fields
     delete this.get
-    // @ts-expect-error - cannot delete non-optional fields
+    // @ts-ignore - cannot delete non-optional fields
     delete this.put
-    // @ts-expect-error - cannot delete non-optional fields
+    // @ts-ignore - cannot delete non-optional fields
     delete this.delete
-    // @ts-expect-error - cannot delete non-optional fields
+    // @ts-ignore - cannot delete non-optional fields
     delete this.options
 
     const fetch = this.fetch
